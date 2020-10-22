@@ -32,9 +32,11 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void update() {
-        if (getY() < 0) {
+        System.out.println(getHeight());
+        if (getY() >= world.getHeight()) {
             fallSound.cue(0);
             fallSound.play();
+            world.deleteGameObject(this);
         }
     }
 
@@ -50,8 +52,8 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
             if (g instanceof Player) {
-                fallSound.cue(0);
-                fallSound.play();
+                catchSound.cue(0);
+                catchSound.play();
                 world.increaseEggsCaught();
                 world.deleteGameObject(this);
             }
