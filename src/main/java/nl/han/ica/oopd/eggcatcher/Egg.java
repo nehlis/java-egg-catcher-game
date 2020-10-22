@@ -7,15 +7,11 @@ import processing.core.PGraphics;
 
 import java.util.List;
 
-/**
- * @author Ralph Niels
- * Bel-klasse
- */
 public class Egg extends GameObject implements ICollidableWithGameObjects {
 
-    private final Sound      fallSound;
-    private       EggCatcher world;
-    private       int        eggSize;
+    private Sound      fallSound;
+    private EggCatcher world;
+    private int        eggSize;
 
     /**
      * Constructor
@@ -45,7 +41,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void draw(PGraphics g) {
-        g.ellipseMode(g.CORNER); // Omdat cirkel anders vanuit midden wordt getekend en dat problemen geeft bij collisiondetectie
+        g.ellipseMode(g.CORNER);
         g.stroke(0, 50, 200, 100);
         g.fill(0, 50, 200, 50);
         g.ellipse(getX(), getY(), eggSize, eggSize);
@@ -54,6 +50,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
+
         }
     }
 }
