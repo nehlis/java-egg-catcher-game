@@ -4,7 +4,6 @@ import nl.han.ica.oopd.waterworld.tiles.BoardsTile;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.persistence.FilePersistence;
 import nl.han.ica.oopg.persistence.IPersistence;
 import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
@@ -18,7 +17,6 @@ public class EggCatcher extends GameEngine {
     private Sound        backgroundSound;
     private TextObject   dashboardText;
     private int          bubblesPopped;
-    private IPersistence persistence;
     private Player       player;
 
 
@@ -158,7 +156,6 @@ public class EggCatcher extends GameEngine {
      */
     public void increaseBubblesPopped() {
         bubblesPopped++;
-        persistence.saveData(Integer.toString(bubblesPopped));
         refreshDasboardText();
     }
 }

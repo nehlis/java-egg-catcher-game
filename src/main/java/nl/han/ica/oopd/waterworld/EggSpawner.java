@@ -13,28 +13,28 @@ import java.util.Random;
  */
 public class EggSpawner implements IAlarmListener {
 
-    private float bubblesPerSecond;
+    private float      eggsPerSecond;
     private Random     random;
     private EggCatcher world;
-    private Sound      popSound;
+    private Sound      fallSound;
 
     /**
      * Constructor
      *
-     * @param world            Referentie naar de wereld
-     * @param popSound         Geluid dat moet klinken als een bel knapt
-     * @param bubblesPerSecond Aantal bellen dat per seconden gemaakt moet worden
+     * @param world         Referentie naar de wereld
+     * @param fallSound     Geluid dat moet klinken als een ei valt.
+     * @param eggsPerSecond Aantal eieren dat per seconden gemaakt moet worden.
      */
-    public EggSpawner(EggCatcher world, Sound popSound, float bubblesPerSecond) {
-        this.bubblesPerSecond = bubblesPerSecond;
+    public EggSpawner(EggCatcher world, Sound fallSound, float eggsPerSecond) {
+        this.eggsPerSecond = eggsPerSecond;
         this.world = world;
-        this.popSound = popSound;
+        this.fallSound = fallSound;
         random = new Random();
         startAlarm();
     }
 
     private void startAlarm() {
-        Alarm alarm = new Alarm("New bubble", 1 / bubblesPerSecond);
+        Alarm alarm = new Alarm("New egg", 1 / eggsPerSecond);
         alarm.addTarget(this);
         alarm.start();
     }
@@ -42,9 +42,8 @@ public class EggSpawner implements IAlarmListener {
     @Override
     public void triggerAlarm(String alarmName) {
         int bubbleSize = random.nextInt(10) + 10;
-        Egg b          = new Egg(bubbleSize, world, popSound);
+        Egg b          = new Egg(bubbleSize, world, fallSound);
         world.addGameObject(b, random.nextInt(world.width), world.height);
         startAlarm();
     }
-
 }
