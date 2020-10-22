@@ -1,4 +1,4 @@
-package nl.han.ica.oopd.waterworld;
+package nl.han.ica.oopd.eggcatcher;
 
 import nl.han.ica.oopg.objects.GameObject;
 import processing.core.PGraphics;

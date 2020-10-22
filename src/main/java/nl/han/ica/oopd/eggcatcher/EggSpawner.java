@@ -1,4 +1,4 @@
-package nl.han.ica.oopd.waterworld;
+package nl.han.ica.oopd.eggcatcher;
 
 import nl.han.ica.oopg.alarm.Alarm;
 import nl.han.ica.oopg.alarm.IAlarmListener;

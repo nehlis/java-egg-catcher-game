@@ -1,6 +1,6 @@
-package nl.han.ica.oopd.waterworld;
+package nl.han.ica.oopd.eggcatcher;
 
-import nl.han.ica.oopd.waterworld.tiles.BoardsTile;
+import nl.han.ica.oopd.eggcatcher.tiles.BoardsTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.CollisionSide;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
@@ -27,7 +27,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
      * @param world Referentie naar de wereld
      */
     public Player(EggCatcher world) {
-        super(new Sprite("src/main/java/nl/han/ica/oopd/waterworld/media/player.png"), 2);
+        super(new Sprite("src/main/java/nl/han/ica/oopd/eggcatcher/media/player.png"), 2);
         this.world = world;
         setCurrentFrameIndex(1);
         setFriction(0.05f);

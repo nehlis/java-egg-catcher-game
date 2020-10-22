@@ -1,4 +1,4 @@
-package nl.han.ica.oopd.waterworld;
+package nl.han.ica.oopd.eggcatcher;
 
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.GameObject;
@@ -54,12 +54,6 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
-            if (g instanceof Swordfish) {
-                fallSound.rewind();
-                fallSound.play();
-                world.deleteGameObject(this);
-                world.increaseBubblesPopped();
-            }
         }
     }
 }

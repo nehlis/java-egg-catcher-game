@@ -1,4 +1,4 @@
-package nl.han.ica.oopd.waterworld.tiles;
+package nl.han.ica.oopd.eggcatcher.tiles;
 
 
 import nl.han.ica.oopg.objects.Sprite;

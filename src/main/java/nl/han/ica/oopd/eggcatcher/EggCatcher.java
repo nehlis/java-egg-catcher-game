@@ -1,10 +1,9 @@
-package nl.han.ica.oopd.waterworld;
+package nl.han.ica.oopd.eggcatcher;
 
-import nl.han.ica.oopd.waterworld.tiles.BoardsTile;
+import nl.han.ica.oopd.eggcatcher.tiles.BoardsTile;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.persistence.IPersistence;
 import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
@@ -21,7 +20,7 @@ public class EggCatcher extends GameEngine {
 
 
     public static void main(String[] args) {
-        String[]   processingArgs = {"nl.han.ica.oopd.waterworld.EggCatcher"};
+        String[]   processingArgs = {"nl.han.ica.oopd.eggcatcher.EggCatcher"};
         EggCatcher mySketch       = new EggCatcher();
 
         PApplet.runSketch(processingArgs, mySketch);
@@ -54,7 +53,7 @@ public class EggCatcher extends GameEngine {
      */
     private void createViewWithoutViewport(int screenWidth, int screenHeight) {
         View view = new View(screenWidth, screenHeight);
-        view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/waterworld/media/background.jpg"));
+        view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
 
         setView(view);
         size(screenWidth, screenHeight);
@@ -75,14 +74,14 @@ public class EggCatcher extends GameEngine {
         View view = new View(viewPort, worldWidth, worldHeight);
         setView(view);
         size(screenWidth, screenHeight);
-        view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/waterworld/media/background.jpg"));
+        view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
     }
 
     /**
      * Initialiseert geluid
      */
     private void initializeSound() {
-        backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/waterworld/media/waterworld.mp3");
+        backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
         backgroundSound.loop(-1);
     }
 
@@ -112,7 +111,7 @@ public class EggCatcher extends GameEngine {
      * Initialiseert de tilemap
      */
     private void initializeTileMap() {
-        Sprite               boardsSprite  = new Sprite("src/main/java/nl/han/ica/oopd/waterworld/media/boards-tile.jpg");
+        Sprite               boardsSprite  = new Sprite("src/main/java/nl/han/ica/oopd/eggcatcher/media/boards-tile.jpg");
         TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
 
         TileType[] tileTypes = {boardTileType};
