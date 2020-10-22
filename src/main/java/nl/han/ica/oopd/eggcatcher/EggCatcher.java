@@ -15,7 +15,6 @@ public class EggCatcher extends GameEngine {
     private Sound      eggFallSound;
     private Sound      eggCatchSound;
     private int        eggsCaught;
-    private Player     player;
     private int        worldWidth;
     private int        worldHeight;
 
@@ -75,7 +74,7 @@ public class EggCatcher extends GameEngine {
      * Maakt de spelobjecten aan
      */
     private void createObjects() {
-        player = new Player(this);
+        Player player = new Player(this);
         addGameObject(player, (float) this.worldWidth / 2, this.worldHeight - 75);
     }
 
