@@ -41,10 +41,18 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void draw(PGraphics g) {
-        g.ellipseMode(g.CORNER);
-        g.stroke(0, 50, 200, 100);
-        g.fill(199, 189, 165);
-        g.ellipse(getX(), getY(), size, size);
+        g.noStroke();
+        g.fill(255);
+        g.pushMatrix();
+        g.translate(x, y);
+        g.beginShape();
+        g.vertex(0, -100);
+        g.bezierVertex(25, -100, 40, -65, 40, -40);
+        g.bezierVertex(40, -15, 25, 0, 0, 0);
+        g.bezierVertex(-25, 0, -40, -15, -40, -40);
+        g.bezierVertex(-40, -65, -25, -100, 0, -100);
+        g.endShape();
+        g.popMatrix();
     }
 
     @Override
