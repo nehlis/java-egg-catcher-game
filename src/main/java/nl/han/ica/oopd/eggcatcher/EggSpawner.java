@@ -30,6 +30,7 @@ public class EggSpawner implements IAlarmListener {
         this.world = world;
         this.fallSound = fallSound;
         random = new Random();
+
         startAlarm();
     }
 
@@ -42,7 +43,14 @@ public class EggSpawner implements IAlarmListener {
     @Override
     public void triggerAlarm(String alarmName) {
         Egg b = new Egg(50, world, fallSound);
-        world.addGameObject(b, random.nextInt(world.width), world.height);
+        world.addGameObject(b, getEggLocation(), world.height);
         startAlarm();
+    }
+
+    /**
+     * @return The chickens random egg location
+     */
+    public int getEggLocation() {
+        return ((this.world.getWorldWidth() / 3) * random.nextInt(3) + 1) - ((this.world.getWorldWidth() / 3) / 2);
     }
 }

@@ -163,4 +163,8 @@ public class EggCatcher extends GameEngine {
         eggsCaught++;
         refreshDasboardText();
     }
+
+    public int getWorldWidth() {
+        return worldWidth;
+    }
 }
