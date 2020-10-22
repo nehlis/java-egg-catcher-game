@@ -32,17 +32,18 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void update() {
-        if (getY() < 0) {
-            fallSound.cue(0);
-            fallSound.play();
-        }
+        if (getY() < world.getHeight()) return;
+
+        fallSound.cue(0);
+        fallSound.play();
+        world.deleteGameObject(this);
     }
 
     @Override
     public void draw(PGraphics g) {
         g.ellipseMode(g.CORNER);
         g.stroke(0, 50, 200, 100);
-        g.fill(206, 93, 219);
+        g.fill(199, 189, 165);
         g.ellipse(getX(), getY(), size, size);
     }
 
@@ -50,8 +51,8 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
             if (g instanceof Player) {
-                fallSound.cue(0);
-                fallSound.play();
+                catchSound.cue(0);
+                catchSound.play();
                 world.increaseEggsCaught();
                 world.deleteGameObject(this);
             }
