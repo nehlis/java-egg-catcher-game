@@ -73,25 +73,6 @@ public class EggCatcher extends GameEngine {
     }
 
     /**
-     * Creeërt de view met viewport
-     *
-     * @param worldWidth   Totale breedte van de wereld
-     * @param worldHeight  Totale hoogte van de wereld
-     * @param screenWidth  Breedte van het scherm
-     * @param screenHeight Hoogte van het scherm
-     * @param zoomFactor   Factor waarmee wordt ingezoomd
-     */
-    private void createViewWithViewport(int worldWidth, int worldHeight, int screenWidth, int screenHeight, float zoomFactor) {
-        EdgeFollowingViewport viewPort = new EdgeFollowingViewport(player, (int) Math.ceil(screenWidth / zoomFactor), (int) Math.ceil(screenHeight / zoomFactor), 0, 0);
-        viewPort.setTolerance(50, 50, 50, 50);
-        View view = new View(viewPort, worldWidth, worldHeight);
-        setView(view);
-        size(screenWidth, screenHeight);
-        view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
-    }
-
-
-    /**
      * Maakt de spelobjecten aan
      */
     private void createObjects() {
