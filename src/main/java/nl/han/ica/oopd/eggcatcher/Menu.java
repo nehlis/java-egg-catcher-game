@@ -1,13 +1,17 @@
 package nl.han.ica.oopd.eggcatcher;
 
-
-import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.GameObject;
 import processing.core.PGraphics;
 
-import java.util.List;
 
-public class Menu extends GameObject  {
+public class Menu extends GameObject {
+
+    EggCatcher game;
+
+    public Menu(EggCatcher game){
+        this.game = game;
+
+    }
 
     @Override
     public void update() {
@@ -27,11 +31,19 @@ public class Menu extends GameObject  {
         g.text("Jouw score: " + Statistics.getHighscore(), 400, 200);
 
         g.textAlign(g.CENTER, g.CENTER);
-        g.textSize(50);
-        g.text("Start", 400, 300);
-
-        g.textAlign(g.CENTER, g.CENTER);
-        g.textSize(50);
-        g.text("Exit", 400, 400);
+        g.textSize(30);
+        g.text("Klik op een toets om te starten", 400, 300);
     }
+
+
+    @Override
+    public void keyPressed(int keyCode, char key) {
+
+
+        System.out.println("test");
+        game.startGame();
+        game.deleteGameObject(this);
+    }
+
+
 }

@@ -39,14 +39,18 @@ public class EggCatcher extends GameEngine {
 
         menuDashboard(worldWidth,worldHeight);
 
-        //initializeSound();
-        //createDashboard(worldWidth, worldHeight);
-        //initializeTileMap();
 
-        //createObjects();
-        //createEggSpawner();
 
         createViewWithoutViewport(worldWidth, worldHeight);
+    }
+
+    public void startGame(){
+        initializeSound();
+        createDashboard(worldWidth, worldHeight);
+        initializeTileMap();
+
+        createObjects();
+        createEggSpawner();
     }
 
     /**
@@ -97,9 +101,13 @@ public class EggCatcher extends GameEngine {
      */
     private void menuDashboard(int dashboardWidth, int dashboardHeight) {
         Dashboard dashboard = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
-        Menu menu = new Menu();
+        Menu menu = new Menu(this);
         dashboard.addGameObject(menu);
         addDashboard(dashboard);
+
+
+
+
     }
 
     private void createDashboard(int dashboardWidth, int dashboardHeight) {
