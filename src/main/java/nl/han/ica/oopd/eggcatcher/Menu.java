@@ -8,7 +8,7 @@ public class Menu extends GameObject {
 
     EggCatcher game;
 
-    public Menu(EggCatcher game){
+    public Menu(EggCatcher game) {
         this.game = game;
 
     }
@@ -20,11 +20,9 @@ public class Menu extends GameObject {
 
     @Override
     public void draw(PGraphics g) {
-
-
-        g.textAlign(g.RIGHT,g.BOTTOM);
+        g.textAlign(g.RIGHT, g.BOTTOM);
         g.textSize(50);
-        g.text("Highscore: " + Statistics.getHighscore(),800,600);
+        g.text("Highscore: " + Statistics.getHighscore(), 800, 600);
 
         g.textAlign(g.CENTER, g.CENTER);
         g.textSize(50);
@@ -35,15 +33,10 @@ public class Menu extends GameObject {
         g.text("Klik op een toets om te starten", 400, 300);
     }
 
-
     @Override
     public void keyPressed(int keyCode, char key) {
-
-
         System.out.println("test");
-        game.startGame();
+        game.init();
         game.deleteGameObject(this);
     }
-
-
 }

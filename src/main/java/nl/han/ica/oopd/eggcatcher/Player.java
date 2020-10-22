@@ -62,7 +62,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         }
     }
 
-
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
         PVector vector;

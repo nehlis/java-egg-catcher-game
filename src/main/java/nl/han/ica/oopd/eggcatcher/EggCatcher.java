@@ -9,7 +9,6 @@ import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.View;
 import processing.core.PApplet;
-import processing.core.PGraphics;
 
 public class EggCatcher extends GameEngine {
     private TextObject dashboardText;
@@ -18,6 +17,9 @@ public class EggCatcher extends GameEngine {
     private int        eggsCaught;
     private int        worldWidth;
     private int        worldHeight;
+    private Menu       menu;
+    private Dashboard  dashboardMenu;
+    private Dashboard  dashboardGame;
 
 
     public static void main(String[] args) {
@@ -36,15 +38,11 @@ public class EggCatcher extends GameEngine {
         this.worldWidth = 800;
         this.worldHeight = 600;
 
-
-        menuDashboard(worldWidth,worldHeight);
-
-
-
+        menuDashboard(worldWidth, worldHeight);
         createViewWithoutViewport(worldWidth, worldHeight);
     }
 
-    public void startGame(){
+    public void startGame() {
         initializeSound();
         createDashboard(worldWidth, worldHeight);
         initializeTileMap();
@@ -100,21 +98,17 @@ public class EggCatcher extends GameEngine {
      * @param dashboardHeight Gewenste hoogte van dashboard
      */
     private void menuDashboard(int dashboardWidth, int dashboardHeight) {
-        Dashboard dashboard = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
-        Menu menu = new Menu(this);
-        dashboard.addGameObject(menu);
-        addDashboard(dashboard);
-
-
-
-
+        dashboardMenu = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
+        menu = new Menu(this);
+        dashboardMenu.addGameObject(menu);
+        addDashboard(dashboardMenu);
     }
 
     private void createDashboard(int dashboardWidth, int dashboardHeight) {
-        Dashboard dashboard = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
+        dashboardGame = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
         dashboardText = new TextObject("Aantal gevangen eieren:");
-        dashboard.addGameObject(dashboardText);
-        addDashboard(dashboard);
+        dashboardGame.addGameObject(dashboardText);
+        addDashboard(dashboardGame);
     }
 
     /**
@@ -146,8 +140,7 @@ public class EggCatcher extends GameEngine {
     }
 
     @Override
-    public void update() {
-    }
+    public void update() {}
 
     /**
      * Vernieuwt het dashboard
@@ -163,10 +156,7 @@ public class EggCatcher extends GameEngine {
     public void increaseEggsCaught() {
         eggsCaught++;
 
-        if (Statistics.getHighscore() < eggsCaught) {
-            Statistics.setHighscore(eggsCaught);
-        }
-
+        Statistics.setHighscore(Math.max(Statistics.getHighscore(), eggsCaught));
         Statistics.setLastScore(eggsCaught);
 
         refreshDasboardText();
@@ -174,5 +164,19 @@ public class EggCatcher extends GameEngine {
 
     public float getThirdOfWorldSize() {
         return (float) worldWidth / 3;
+    }
+
+    @Override
+    public void keyPressed() {
+        if (!GameState.isPlaying()) {
+            GameState.plays();
+            deleteGameObject(menu);
+            deleteDashboard(dashboardMenu);
+            startGame();
+        } else {
+            super.keyPressed();
+            deleteDashboard(dashboardGame);
+            menuDashboard(worldWidth, worldHeight);
+        }
     }
 }

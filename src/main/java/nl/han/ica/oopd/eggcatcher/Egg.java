@@ -32,15 +32,18 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void update() {
-        if (getY() < world.getHeight()) return;
+        if (getY() < world.getHeight() || !GameState.isPlaying()) return;
 
         fallSound.cue(0);
         fallSound.play();
-        world.deleteGameObject(this);
+        world.deleteAllGameOBjects();
+        GameState.died();
     }
 
     @Override
     public void draw(PGraphics g) {
+        if (!GameState.isPlaying()) return;
+
         g.noStroke();
         g.fill(255);
         g.pushMatrix();
@@ -51,7 +54,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         g.bezierVertex(40, -15, 25, 0, 0, 0);
         g.bezierVertex(-25, 0, -40, -15, -40, -40);
         g.bezierVertex(-40, -65, -25, -100, 0, -100);
-        g.scale((float)0.5);
+        g.scale((float) 0.5);
         g.endShape();
         g.popMatrix();
     }
