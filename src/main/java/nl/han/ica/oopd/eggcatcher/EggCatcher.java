@@ -17,7 +17,7 @@ public class EggCatcher extends GameEngine {
     private TextObject dashboardText;
     private Sound      eggFallSound;
     private EggSpawner eggSpawner;
-    private int        bubblesPopped;
+    private int        eggsCaught;
     private Player     player;
 
 
@@ -102,7 +102,7 @@ public class EggCatcher extends GameEngine {
      * Maakt de spawner voor de bellen aan
      */
     public void createEggSpawner() {
-        eggSpawner = new EggSpawner(this, eggFallSound, 2);
+        eggSpawner = new EggSpawner(this, eggFallSound, 1);
     }
 
     /**
@@ -154,15 +154,15 @@ public class EggCatcher extends GameEngine {
      * Vernieuwt het dashboard
      */
     private void refreshDasboardText() {
-        dashboardText.setText("Bubbles popped: " + bubblesPopped);
+        dashboardText.setText("Aantal gevangen eieren: " + eggsCaught);
     }
 
     /**
      * Verhoogt de teller voor het aantal
      * geknapte bellen met 1
      */
-    public void increaseBubblesPopped() {
-        bubblesPopped++;
+    public void increaseEggsCaught() {
+        eggsCaught++;
         refreshDasboardText();
     }
 }

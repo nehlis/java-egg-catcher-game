@@ -50,7 +50,10 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
-
+            if (g instanceof Player) {
+                world.increaseEggsCaught();
+                world.deleteGameObject(this);
+            }
         }
     }
 }

@@ -13,10 +13,10 @@ import java.util.Random;
  */
 public class EggSpawner implements IAlarmListener {
 
-    private float      eggsPerSecond;
-    private Random     random;
-    private EggCatcher world;
-    private Sound      fallSound;
+    private final float      eggsPerSecond;
+    private final Random     random;
+    private final EggCatcher world;
+    private final Sound      fallSound;
 
     /**
      * Constructor
@@ -41,8 +41,7 @@ public class EggSpawner implements IAlarmListener {
 
     @Override
     public void triggerAlarm(String alarmName) {
-        int bubbleSize = random.nextInt(10) + 10;
-        Egg b          = new Egg(bubbleSize, world, fallSound);
+        Egg b = new Egg(50, world, fallSound);
         world.addGameObject(b, random.nextInt(world.width), world.height);
         startAlarm();
     }
