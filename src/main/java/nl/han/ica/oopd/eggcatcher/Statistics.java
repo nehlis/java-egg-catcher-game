@@ -3,21 +3,17 @@ package nl.han.ica.oopd.eggcatcher;
 import nl.han.ica.oopg.persistence.FilePersistence;
 
 public class Statistics {
-    public static int highscore;
+    private static FilePersistence persistence;
 
-    public static void setHighscore(int _highscore) {
-        highscore = _highscore;
-        saveHighscore();
+    public static void setHighscore(int highscore) {
+        persistence = new FilePersistence("main/java/nl/han/ica/oopd/eggcatcher/media/highscore.txt");
+
+        if(persistence.fileExists()) persistence.saveData(String.valueOf(highscore));
     }
 
     public static int getHighscore() {
-        return highscore;
-    }
+        persistence = new FilePersistence("main/java/nl/han/ica/oopd/eggcatcher/media/highscore.txt");
 
-    public static void saveHighscore() {
-        FilePersistence persistence = new FilePersistence("main/java/nl/han/ica/oopd/waterworld/media/highscore.txt");
-        if (persistence.fileExists()) {
-            persistence.saveData(String.valueOf(highscore));
-        }
+        return persistence.fileExists() ? Integer.parseInt(persistence.loadDataString()) : 0;
     }
 }
