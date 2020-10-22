@@ -7,7 +7,6 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
-import nl.han.ica.oopg.view.EdgeFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import processing.core.PApplet;
 
@@ -84,7 +83,7 @@ public class EggCatcher extends GameEngine {
      * Maakt de spawner voor de bellen aan
      */
     public void createEggSpawner() {
-        EggSpawner eggSpawner = new EggSpawner(this, eggFallSound, eggCatchSound, 1);
+        new EggSpawner(this, eggFallSound, eggCatchSound, 1);
     }
 
     /**
@@ -148,7 +147,7 @@ public class EggCatcher extends GameEngine {
         refreshDasboardText();
     }
 
-    public int getWorldWidth() {
-        return worldWidth;
+    public float getThirdOfWorldSize() {
+        return (float) worldWidth / 3;
     }
 }
