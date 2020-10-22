@@ -144,7 +144,6 @@ public class EggCatcher extends GameEngine {
     public void increaseEggsCaught() {
         eggsCaught++;
 
-        System.out.println(Statistics.getHighscore());
         if (Statistics.getHighscore() < eggsCaught) {
             Statistics.setHighscore(eggsCaught);
         }
