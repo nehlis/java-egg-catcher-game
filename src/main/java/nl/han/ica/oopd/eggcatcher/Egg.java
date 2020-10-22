@@ -9,27 +9,22 @@ import java.util.List;
 
 public class Egg extends GameObject implements ICollidableWithGameObjects {
 
-    private Sound      fallSound;
-    private EggCatcher world;
-    private int        eggSize;
+    private       Sound      fallSound;
+    private       EggCatcher world;
+    private final int        size = 50;
 
     /**
      * Constructor
      *
-     * @param eggSize   Afmeting van de bel
      * @param world     Referentie naar de wereld
      * @param fallSound Geluid dat moet klinken als het ei valt.
      */
-    public Egg(int eggSize, EggCatcher world, Sound fallSound) {
-        this.eggSize = eggSize;
+    public Egg(EggCatcher world, Sound fallSound) {
         this.fallSound = fallSound;
         this.world = world;
-        setySpeed(-eggSize / 10f);
-        /* De volgende regels zijn in een zelfgekend object nodig
-            om collisiondetectie mogelijk te maken.
-         */
-        setHeight(eggSize);
-        setWidth(eggSize);
+        setySpeed(-size / 10f);
+        setHeight(size);
+        setWidth(size);
     }
 
     @Override
@@ -45,7 +40,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         g.ellipseMode(g.CORNER);
         g.stroke(0, 50, 200, 100);
         g.fill(206, 93, 219);
-        g.ellipse(getX(), getY(), eggSize, eggSize);
+        g.ellipse(getX(), getY(), size, size);
     }
 
     @Override

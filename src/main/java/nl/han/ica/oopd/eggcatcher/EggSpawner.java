@@ -6,11 +6,6 @@ import nl.han.ica.oopg.sound.Sound;
 
 import java.util.Random;
 
-/**
- * @author Ralph Niels
- * Klasse die Bubbles aanmaakt met configureerbare
- * snelheid.
- */
 public class EggSpawner implements IAlarmListener {
 
     private final float      eggsPerSecond;
@@ -42,7 +37,7 @@ public class EggSpawner implements IAlarmListener {
 
     @Override
     public void triggerAlarm(String alarmName) {
-        Egg b = new Egg(50, world, fallSound);
+        Egg b = new Egg(world, fallSound);
         world.addGameObject(b, getEggLocation(), world.height);
         startAlarm();
     }
