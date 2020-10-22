@@ -13,10 +13,12 @@ import processing.core.PApplet;
 
 public class EggCatcher extends GameEngine {
 
-    private Sound        backgroundSound;
-    private TextObject   dashboardText;
-    private int          bubblesPopped;
-    private Player       player;
+    private Sound      backgroundSound;
+    private TextObject dashboardText;
+    private Sound      eggFallSound;
+    private EggSpawner eggSpawner;
+    private int        eggsCaught;
+    private Player     player;
 
 
     public static void main(String[] args) {
@@ -41,8 +43,18 @@ public class EggCatcher extends GameEngine {
         initializeTileMap();
 
         createObjects();
+        createEggSpawner();
 
         createViewWithoutViewport(worldWidth, worldHeight);
+    }
+
+    /**
+     * Initialiseert geluid
+     */
+    private void initializeSound() {
+        backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
+        backgroundSound.loop(-1);
+        eggFallSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
     }
 
     /**
@@ -77,14 +89,6 @@ public class EggCatcher extends GameEngine {
         view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
     }
 
-    /**
-     * Initialiseert geluid
-     */
-    private void initializeSound() {
-        backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
-        backgroundSound.loop(-1);
-    }
-
 
     /**
      * Maakt de spelobjecten aan
@@ -92,6 +96,13 @@ public class EggCatcher extends GameEngine {
     private void createObjects() {
         player = new Player(this);
         addGameObject(player, 100, 100);
+    }
+
+    /**
+     * Maakt de spawner voor de bellen aan
+     */
+    public void createEggSpawner() {
+        eggSpawner = new EggSpawner(this, eggFallSound, 1);
     }
 
     /**
@@ -143,15 +154,15 @@ public class EggCatcher extends GameEngine {
      * Vernieuwt het dashboard
      */
     private void refreshDasboardText() {
-        dashboardText.setText("Bubbles popped: " + bubblesPopped);
+        dashboardText.setText("Aantal gevangen eieren: " + eggsCaught);
     }
 
     /**
      * Verhoogt de teller voor het aantal
      * geknapte bellen met 1
      */
-    public void increaseBubblesPopped() {
-        bubblesPopped++;
+    public void increaseEggsCaught() {
+        eggsCaught++;
         refreshDasboardText();
     }
 }

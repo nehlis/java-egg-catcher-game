@@ -56,23 +56,14 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     @Override
     public void keyPressed(int keyCode, char key) {
-        final int speed = 5;
+        final int speed = 10;
         if (keyCode == world.LEFT) {
             setDirectionSpeed(270, speed);
             setCurrentFrameIndex(0);
         }
-        if (keyCode == world.UP) {
-            setDirectionSpeed(0, speed);
-        }
         if (keyCode == world.RIGHT) {
             setDirectionSpeed(90, speed);
             setCurrentFrameIndex(0);
-        }
-        if (keyCode == world.DOWN) {
-            setDirectionSpeed(180, speed);
-        }
-        if (key == ' ') {
-            System.out.println("Spatie!");
         }
     }
 
