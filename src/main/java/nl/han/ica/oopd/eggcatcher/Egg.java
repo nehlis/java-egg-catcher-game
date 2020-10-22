@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Egg extends GameObject implements ICollidableWithGameObjects {
 
-    private       Sound      fallSound;
-    private       EggCatcher world;
+    private final Sound      fallSound;
+    private final EggCatcher world;
     private final int        size = 50;
 
     /**
@@ -22,21 +22,21 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public Egg(EggCatcher world, Sound fallSound) {
         this.fallSound = fallSound;
         this.world = world;
-        setySpeed(-size / 10f);
+
+        setySpeed(size / 10f);
         setHeight(size);
         setWidth(size);
     }
 
     @Override
     public void update() {
-        if (getY() <= 100) {
+        if (getY() < 0) {
             world.deleteGameObject(this);
         }
     }
 
     @Override
     public void draw(PGraphics g) {
-
         g.ellipseMode(g.CORNER);
         g.stroke(0, 50, 200, 100);
         g.fill(206, 93, 219);

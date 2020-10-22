@@ -38,7 +38,7 @@ public class EggSpawner implements IAlarmListener {
     @Override
     public void triggerAlarm(String alarmName) {
         Egg b = new Egg(world, fallSound);
-        world.addGameObject(b, getEggLocation(), world.height);
+        world.addGameObject(b, getEggLocation(), 0);
         startAlarm();
     }
 
