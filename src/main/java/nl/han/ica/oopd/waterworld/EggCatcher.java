@@ -34,11 +34,11 @@ public class EggCatcher extends GameEngine {
     @Override
     public void setupGame() {
 
-        int worldWidth  = 1204;
-        int worldHeight = 903;
+        int worldWidth  = 1920;
+        int worldHeight = 1080;
 
         initializeSound();
-        createDashboard(worldWidth, 100);
+        createDashboard(worldWidth, worldHeight);
         initializeTileMap();
 
         createObjects();
@@ -93,8 +93,6 @@ public class EggCatcher extends GameEngine {
     private void createObjects() {
         player = new Player(this);
         addGameObject(player, 100, 100);
-        Swordfish sf = new Swordfish(this);
-        addGameObject(sf, 200, 200);
     }
 
     /**
@@ -105,7 +103,7 @@ public class EggCatcher extends GameEngine {
      */
     private void createDashboard(int dashboardWidth, int dashboardHeight) {
         Dashboard dashboard = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
-        dashboardText = new TextObject("");
+        dashboardText = new TextObject("Aantal gevangen eieren:");
         dashboard.addGameObject(dashboardText);
         addDashboard(dashboard);
     }
@@ -114,7 +112,6 @@ public class EggCatcher extends GameEngine {
      * Initialiseert de tilemap
      */
     private void initializeTileMap() {
-        /* TILES */
         Sprite               boardsSprite  = new Sprite("src/main/java/nl/han/ica/oopd/waterworld/media/boards-tile.jpg");
         TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
 
@@ -130,7 +127,7 @@ public class EggCatcher extends GameEngine {
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-                {-1, -1, -1, 0, 0, 0, 0, -1, 0, 0},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
