@@ -159,6 +159,8 @@ public class EggCatcher extends GameEngine {
             Statistics.setHighscore(eggsCaught);
         }
 
+        Statistics.setLastScore(eggsCaught);
+
         refreshDasboardText();
     }
 
