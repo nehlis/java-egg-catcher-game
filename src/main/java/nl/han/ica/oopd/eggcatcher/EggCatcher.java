@@ -14,6 +14,7 @@ import processing.core.PApplet;
 public class EggCatcher extends GameEngine {
     private TextObject dashboardText;
     private Sound      eggFallSound;
+    private Sound      eggCatchSound;
     private int        eggsCaught;
     private Player     player;
     private int        worldWidth;
@@ -54,6 +55,7 @@ public class EggCatcher extends GameEngine {
         backgroundSound.loop(-1);
 
         eggFallSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
+        eggCatchSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
     }
 
     /**
@@ -101,7 +103,7 @@ public class EggCatcher extends GameEngine {
      * Maakt de spawner voor de bellen aan
      */
     public void createEggSpawner() {
-        EggSpawner eggSpawner = new EggSpawner(this, eggFallSound, 1);
+        EggSpawner eggSpawner = new EggSpawner(this, eggFallSound, eggCatchSound, 1);
     }
 
     /**

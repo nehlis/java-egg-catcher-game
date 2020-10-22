@@ -10,6 +10,7 @@ import java.util.List;
 public class Egg extends GameObject implements ICollidableWithGameObjects {
 
     private final Sound      fallSound;
+    private final Sound      catchSound;
     private final EggCatcher world;
     private final int        size = 50;
 
@@ -19,8 +20,9 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
      * @param world     Referentie naar de wereld
      * @param fallSound Geluid dat moet klinken als het ei valt.
      */
-    public Egg(EggCatcher world, Sound fallSound) {
+    public Egg(EggCatcher world, Sound fallSound, Sound catchSound) {
         this.fallSound = fallSound;
+        this.catchSound = catchSound;
         this.world = world;
 
         setySpeed(size / 10f);
@@ -31,7 +33,8 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     @Override
     public void update() {
         if (getY() < 0) {
-            world.deleteGameObject(this);
+            fallSound.cue(0);
+            fallSound.play();
         }
     }
 
