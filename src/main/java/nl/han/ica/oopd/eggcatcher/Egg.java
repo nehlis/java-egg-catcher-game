@@ -41,9 +41,10 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void draw(PGraphics g) {
+
         g.ellipseMode(g.CORNER);
         g.stroke(0, 50, 200, 100);
-        g.fill(0, 50, 200, 50);
+        g.fill(206, 93, 219);
         g.ellipse(getX(), getY(), eggSize, eggSize);
     }
 

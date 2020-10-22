@@ -12,13 +12,12 @@ import nl.han.ica.oopg.view.View;
 import processing.core.PApplet;
 
 public class EggCatcher extends GameEngine {
-
-    private Sound      backgroundSound;
     private TextObject dashboardText;
     private Sound      eggFallSound;
-    private EggSpawner eggSpawner;
     private int        eggsCaught;
     private Player     player;
+    private int        worldWidth;
+    private int        worldHeight;
 
 
     public static void main(String[] args) {
@@ -34,9 +33,8 @@ public class EggCatcher extends GameEngine {
      */
     @Override
     public void setupGame() {
-
-        int worldWidth  = 1920;
-        int worldHeight = 1080;
+        this.worldWidth = 800;
+        this.worldHeight = 600;
 
         initializeSound();
         createDashboard(worldWidth, worldHeight);
@@ -52,7 +50,7 @@ public class EggCatcher extends GameEngine {
      * Initialiseert geluid
      */
     private void initializeSound() {
-        backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
+        Sound backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
         backgroundSound.loop(-1);
         eggFallSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
     }
@@ -95,14 +93,14 @@ public class EggCatcher extends GameEngine {
      */
     private void createObjects() {
         player = new Player(this);
-        addGameObject(player, 100, 100);
+        addGameObject(player, (float) this.worldWidth / 2, this.worldHeight);
     }
 
     /**
      * Maakt de spawner voor de bellen aan
      */
     public void createEggSpawner() {
-        eggSpawner = new EggSpawner(this, eggFallSound, 1);
+        EggSpawner eggSpawner = new EggSpawner(this, eggFallSound, 1);
     }
 
     /**
