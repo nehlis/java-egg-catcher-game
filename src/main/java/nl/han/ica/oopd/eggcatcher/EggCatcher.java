@@ -93,7 +93,7 @@ public class EggCatcher extends GameEngine {
      */
     private void createObjects() {
         player = new Player(this);
-        addGameObject(player, (float) this.worldWidth / 2, this.worldHeight);
+        addGameObject(player, (float) this.worldWidth / 2, this.worldHeight - 75);
     }
 
     /**
