@@ -54,7 +54,7 @@ public class EggCatcher extends GameEngine {
         Sound backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
         backgroundSound.loop(-1);
 
-        eggFallSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
+        eggFallSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/game-over.mp3");
         eggCatchSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
     }
 
