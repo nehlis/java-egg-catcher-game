@@ -10,6 +10,7 @@ import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.EdgeFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 public class EggCatcher extends GameEngine {
     private TextObject dashboardText;
@@ -37,12 +38,15 @@ public class EggCatcher extends GameEngine {
         this.worldWidth = 800;
         this.worldHeight = 600;
 
-        initializeSound();
-        createDashboard(worldWidth, worldHeight);
-        initializeTileMap();
 
-        createObjects();
-        createEggSpawner();
+        menuDashboard(worldWidth,worldHeight);
+
+        //initializeSound();
+        //createDashboard(worldWidth, worldHeight);
+        //initializeTileMap();
+
+        //createObjects();
+        //createEggSpawner();
 
         createViewWithoutViewport(worldWidth, worldHeight);
     }
@@ -112,6 +116,13 @@ public class EggCatcher extends GameEngine {
      * @param dashboardWidth  Gewenste breedte van dashboard
      * @param dashboardHeight Gewenste hoogte van dashboard
      */
+    private void menuDashboard(int dashboardWidth, int dashboardHeight) {
+        Dashboard dashboard = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
+        Menu menu = new Menu();
+        dashboard.addGameObject(menu);
+        addDashboard(dashboard);
+    }
+
     private void createDashboard(int dashboardWidth, int dashboardHeight) {
         Dashboard dashboard = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
         dashboardText = new TextObject("Aantal gevangen eieren:");
