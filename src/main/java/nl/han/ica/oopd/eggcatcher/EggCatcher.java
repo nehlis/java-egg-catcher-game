@@ -7,7 +7,6 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
-import nl.han.ica.oopg.view.EdgeFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import processing.core.PApplet;
 import processing.core.PGraphics;
@@ -17,7 +16,6 @@ public class EggCatcher extends GameEngine {
     private Sound      eggFallSound;
     private Sound      eggCatchSound;
     private int        eggsCaught;
-    private Player     player;
     private int        worldWidth;
     private int        worldHeight;
 
@@ -77,29 +75,10 @@ public class EggCatcher extends GameEngine {
     }
 
     /**
-     * Creeërt de view met viewport
-     *
-     * @param worldWidth   Totale breedte van de wereld
-     * @param worldHeight  Totale hoogte van de wereld
-     * @param screenWidth  Breedte van het scherm
-     * @param screenHeight Hoogte van het scherm
-     * @param zoomFactor   Factor waarmee wordt ingezoomd
-     */
-    private void createViewWithViewport(int worldWidth, int worldHeight, int screenWidth, int screenHeight, float zoomFactor) {
-        EdgeFollowingViewport viewPort = new EdgeFollowingViewport(player, (int) Math.ceil(screenWidth / zoomFactor), (int) Math.ceil(screenHeight / zoomFactor), 0, 0);
-        viewPort.setTolerance(50, 50, 50, 50);
-        View view = new View(viewPort, worldWidth, worldHeight);
-        setView(view);
-        size(screenWidth, screenHeight);
-        view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
-    }
-
-
-    /**
      * Maakt de spelobjecten aan
      */
     private void createObjects() {
-        player = new Player(this);
+        Player player = new Player(this);
         addGameObject(player, (float) this.worldWidth / 2, this.worldHeight - 75);
     }
 
@@ -107,7 +86,7 @@ public class EggCatcher extends GameEngine {
      * Maakt de spawner voor de bellen aan
      */
     public void createEggSpawner() {
-        EggSpawner eggSpawner = new EggSpawner(this, eggFallSound, eggCatchSound, 1);
+        new EggSpawner(this, eggFallSound, eggCatchSound, 1);
     }
 
     /**
@@ -175,10 +154,16 @@ public class EggCatcher extends GameEngine {
      */
     public void increaseEggsCaught() {
         eggsCaught++;
+
+        System.out.println(Statistics.getHighscore());
+        if (Statistics.getHighscore() < eggsCaught) {
+            Statistics.setHighscore(eggsCaught);
+        }
+
         refreshDasboardText();
     }
 
-    public int getWorldWidth() {
-        return worldWidth;
+    public float getThirdOfWorldSize() {
+        return (float) worldWidth / 3;
     }
 }

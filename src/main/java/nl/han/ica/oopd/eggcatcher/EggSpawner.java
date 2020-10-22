@@ -13,6 +13,7 @@ public class EggSpawner implements IAlarmListener {
     private final EggCatcher world;
     private final Sound      fallSound;
     private final Sound      catchSound;
+    private       Chicken[]  chickens;
 
     /**
      * Constructor
@@ -28,7 +29,16 @@ public class EggSpawner implements IAlarmListener {
         this.catchSound = catchSound;
         random = new Random();
 
+        generateChickens();
         startAlarm();
+    }
+
+    private void generateChickens() {
+        chickens = new Chicken[] { new Chicken(), new Chicken(), new Chicken() };
+
+        for (int i = 0; i < chickens.length; i++) {
+            world.addGameObject(chickens[i], (world.getThirdOfWorldSize() * (i + 1)) - (world.getThirdOfWorldSize() / 2), 75);
+        }
     }
 
     private void startAlarm() {
@@ -39,15 +49,17 @@ public class EggSpawner implements IAlarmListener {
 
     @Override
     public void triggerAlarm(String alarmName) {
-        Egg b = new Egg(world, fallSound, catchSound);
-        world.addGameObject(b, getEggLocation(), 0);
+        Egg     b             = new Egg(world, fallSound, catchSound);
+        Chicken spawnLocation = getRandomChicken();
+
+        world.addGameObject(b, spawnLocation.getX(), spawnLocation.getY());
         startAlarm();
     }
 
     /**
-     * @return The chickens random egg location
+     * @return Returns a random chicken.
      */
-    public int getEggLocation() {
-        return ((this.world.getWorldWidth() / 3) * (random.nextInt(3) + 1)) - ((this.world.getWorldWidth() / 3) / 2);
+    public Chicken getRandomChicken() {
+        return chickens[random.nextInt(chickens.length)];
     }
 }

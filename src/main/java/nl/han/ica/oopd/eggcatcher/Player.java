@@ -11,11 +11,6 @@ import processing.core.PVector;
 
 import java.util.List;
 
-
-/**
- * @author Ralph Niels
- * De spelerklasse (het paarse visje)
- */
 public class Player extends AnimatedSpriteObject implements ICollidableWithTiles {
 
     final         int        size = 25;
