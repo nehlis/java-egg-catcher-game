@@ -14,7 +14,7 @@ public class EggSpawner implements IAlarmListener {
     private final Sound      fallSound;
     private final Sound      catchSound;
     private       Chicken[]  chickens;
-
+    private Alarm            alarm;
     /**
      * Constructor
      *
@@ -42,10 +42,16 @@ public class EggSpawner implements IAlarmListener {
     }
 
     private void startAlarm() {
-        Alarm alarm = new Alarm("New egg", 1 / eggsPerSecond);
+        alarm = new Alarm("New egg", 1 / eggsPerSecond);
         alarm.addTarget(this);
         alarm.start();
     }
+
+    public void stopAlarm() {
+        alarm.stop();
+
+    }
+
 
     @Override
     public void triggerAlarm(String alarmName) {

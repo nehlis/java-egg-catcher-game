@@ -38,6 +38,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         fallSound.play();
         world.deleteAllGameOBjects();
         GameState.died();
+        world.reset();
     }
 
     @Override

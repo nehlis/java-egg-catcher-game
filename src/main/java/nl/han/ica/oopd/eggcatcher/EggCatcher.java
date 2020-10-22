@@ -10,21 +10,26 @@ import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.View;
 import processing.core.PApplet;
 
+import javax.swing.*;
+
 public class EggCatcher extends GameEngine {
     private TextObject dashboardText;
-    private Sound      eggFallSound;
-    private Sound      eggCatchSound;
-    private int        eggsCaught;
-    private int        worldWidth;
-    private int        worldHeight;
-    private Menu       menu;
-    private Dashboard  dashboardMenu;
-    private Dashboard  dashboardGame;
+    private Sound backgroundSound;
+    private Sound eggFallSound;
+    private Sound eggCatchSound;
+    private int eggsCaught = 0;
+    private int worldWidth;
+    private int worldHeight;
+    private Menu menu;
+    private Dashboard dashboardMenu;
+    private Dashboard dashboardGame;
+    private EggSpawner eggSpawner;
+    private ImageIcon gameIcon;
 
 
     public static void main(String[] args) {
-        String[]   processingArgs = {"nl.han.ica.oopd.eggcatcher.EggCatcher"};
-        EggCatcher mySketch       = new EggCatcher();
+        String[] processingArgs = {"EggCatcher The Game"};
+        EggCatcher mySketch = new EggCatcher();
 
         PApplet.runSketch(processingArgs, mySketch);
     }
@@ -37,16 +42,17 @@ public class EggCatcher extends GameEngine {
     public void setupGame() {
         this.worldWidth = 800;
         this.worldHeight = 600;
+        gameIcon = new ImageIcon(loadBytes("src/main/java/nl/han/ica/oopd/eggcatcher/media/egg.png"));
+        frame.setIconImage(gameIcon.getImage());
 
         menuDashboard(worldWidth, worldHeight);
         createViewWithoutViewport(worldWidth, worldHeight);
     }
 
     public void startGame() {
-        initializeSound();
         createDashboard(worldWidth, worldHeight);
         initializeTileMap();
-
+        initializeSound();
         createObjects();
         createEggSpawner();
     }
@@ -55,11 +61,15 @@ public class EggCatcher extends GameEngine {
      * Initialiseert geluid
      */
     private void initializeSound() {
-        Sound backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
+        backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
         backgroundSound.loop(-1);
 
         eggFallSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/game-over.mp3");
         eggCatchSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
+    }
+
+    private void pauseMusic() {
+        backgroundSound.pause();
     }
 
     /**
@@ -85,10 +95,10 @@ public class EggCatcher extends GameEngine {
     }
 
     /**
-     * Maakt de spawner voor de bellen aan
+     * Maakt de spawner voor de eieren aan
      */
     public void createEggSpawner() {
-        new EggSpawner(this, eggFallSound, eggCatchSound, 1);
+        eggSpawner = new EggSpawner(this, eggFallSound, eggCatchSound, 1);
     }
 
     /**
@@ -106,7 +116,7 @@ public class EggCatcher extends GameEngine {
 
     private void createDashboard(int dashboardWidth, int dashboardHeight) {
         dashboardGame = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
-        dashboardText = new TextObject("Aantal gevangen eieren:");
+        dashboardText = new TextObject("Aantal gevangen eieren: " + eggsCaught);
         dashboardGame.addGameObject(dashboardText);
         addDashboard(dashboardGame);
     }
@@ -115,11 +125,11 @@ public class EggCatcher extends GameEngine {
      * Initialiseert de tilemap
      */
     private void initializeTileMap() {
-        Sprite               boardsSprite  = new Sprite("src/main/java/nl/han/ica/oopd/eggcatcher/media/boards-tile.jpg");
+        Sprite boardsSprite = new Sprite("src/main/java/nl/han/ica/oopd/eggcatcher/media/boards-tile.jpg");
         TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
 
         TileType[] tileTypes = {boardTileType};
-        int        tileSize  = 50;
+        int tileSize = 50;
         int[][] tilesMap = {
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
@@ -140,7 +150,8 @@ public class EggCatcher extends GameEngine {
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
 
     /**
      * Vernieuwt het dashboard
@@ -150,8 +161,7 @@ public class EggCatcher extends GameEngine {
     }
 
     /**
-     * Verhoogt de teller voor het aantal
-     * geknapte bellen met 1
+     * Verhoogt de teller voor het aantal eieren
      */
     public void increaseEggsCaught() {
         eggsCaught++;
@@ -162,21 +172,35 @@ public class EggCatcher extends GameEngine {
         refreshDasboardText();
     }
 
+    public void resetEggsCounter() {
+        eggsCaught = 0;
+    }
+
     public float getThirdOfWorldSize() {
         return (float) worldWidth / 3;
     }
 
     @Override
     public void keyPressed() {
-        if (!GameState.isPlaying()) {
-            GameState.plays();
-            deleteGameObject(menu);
-            deleteDashboard(dashboardMenu);
-            startGame();
+        System.out.println(key);
+        if (key == ' ') {
+            if (!GameState.isPlaying()) {
+                GameState.plays();
+                deleteGameObject(menu);
+                deleteDashboard(dashboardMenu);
+                startGame();
+            }
         } else {
             super.keyPressed();
-            deleteDashboard(dashboardGame);
-            menuDashboard(worldWidth, worldHeight);
         }
+    }
+
+    public void reset() {
+        deleteDashboard(dashboardGame);
+        pauseMusic();
+        dashboardGame = null;
+        eggSpawner.stopAlarm();
+        resetEggsCounter();
+        menuDashboard(worldWidth, worldHeight);
     }
 }

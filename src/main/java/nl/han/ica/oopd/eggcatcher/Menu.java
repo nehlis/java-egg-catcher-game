@@ -26,11 +26,11 @@ public class Menu extends GameObject {
 
         g.textAlign(g.CENTER, g.CENTER);
         g.textSize(50);
-        g.text("Jouw score: " + Statistics.getHighscore(), 400, 200);
+        g.text("Jouw score: " + Statistics.getLastScore(), 400, 200);
 
         g.textAlign(g.CENTER, g.CENTER);
         g.textSize(30);
-        g.text("Klik op een toets om te starten", 400, 300);
+        g.text("Druk op spatie om te starten", 400, 300);
     }
 
     @Override
