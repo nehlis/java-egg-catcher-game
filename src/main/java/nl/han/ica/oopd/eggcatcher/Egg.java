@@ -52,6 +52,8 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
             if (g instanceof Player) {
+                fallSound.cue(0);
+                fallSound.play();
                 world.increaseEggsCaught();
                 world.deleteGameObject(this);
             }
