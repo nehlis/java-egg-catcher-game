@@ -1,5 +1,6 @@
 package nl.han.ica.oopd.eggcatcher;
 
+import nl.han.ica.oopd.eggcatcher.controllers.SoundController;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.sound.Sound;

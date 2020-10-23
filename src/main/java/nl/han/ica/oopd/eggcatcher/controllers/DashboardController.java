@@ -1,5 +1,8 @@
-package nl.han.ica.oopd.eggcatcher;
+package nl.han.ica.oopd.eggcatcher.controllers;
 
+import nl.han.ica.oopd.eggcatcher.EggCatcher;
+import nl.han.ica.oopd.eggcatcher.Menu;
+import nl.han.ica.oopd.eggcatcher.TextObject;
 import nl.han.ica.oopg.dashboard.Dashboard;
 
 public class DashboardController {
@@ -9,7 +12,7 @@ public class DashboardController {
     private       TextObject dashboardText;
     private final EggCatcher game;
 
-    DashboardController(EggCatcher game) {
+    public DashboardController(EggCatcher game) {
         this.game = game;
     }
 

@@ -1,5 +1,7 @@
 package nl.han.ica.oopd.eggcatcher;
 
+import nl.han.ica.oopd.eggcatcher.controllers.DashboardController;
+import nl.han.ica.oopd.eggcatcher.controllers.SoundController;
 import nl.han.ica.oopd.eggcatcher.tiles.BoardsTile;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
@@ -15,8 +17,8 @@ public class EggCatcher extends GameEngine {
     private      int                 eggsCaught  = 0;
     public final int                 worldWidth  = 800;
     public final int                 worldHeight = 600;
-    private      EggSpawner          eggSpawner;
-    public       DashboardController dashboardController;
+    private EggSpawner          eggSpawner;
+    public  DashboardController dashboardController;
 
 
     public static void main(String[] args) {
