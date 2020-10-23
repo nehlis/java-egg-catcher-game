@@ -52,11 +52,11 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     @Override
     public void keyPressed(int keyCode, char key) {
         final int speed = 10;
-        if (keyCode == world.LEFT) {
+        if (keyCode == world.LEFT || key == 'a') {
             setDirectionSpeed(270, speed);
             setCurrentFrameIndex(0);
         }
-        if (keyCode == world.RIGHT) {
+        if (keyCode == world.RIGHT || key == 'd') {
             setDirectionSpeed(90, speed);
             setCurrentFrameIndex(0);
         }
