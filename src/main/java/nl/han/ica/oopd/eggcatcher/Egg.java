@@ -30,7 +30,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public void update() {
         if (getY() < world.getHeight() || !GameState.isPlaying()) return;
 
-        SoundController.play(SoundController.getEggFallSound());
+        SoundController.play("fall");
         world.deleteAllGameOBjects();
         GameState.died();
         world.reset();
@@ -44,7 +44,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     }
 
     public void caught(Egg egg) {
-        SoundController.play(SoundController.getEggCatchSound());
+        SoundController.play("catch");
         world.increaseEggsCaught();
 
         Statistics.setHighscore(Math.max(Statistics.getHighscore(), world.getEggsCaught()));
