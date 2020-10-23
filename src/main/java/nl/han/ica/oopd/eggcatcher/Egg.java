@@ -62,13 +62,13 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         Statistics.setLastScore(world.getEggsCaught());
 
         world.deleteGameObject(egg);
-        world.refreshDasboardText();
+        world.dashboardController.refreshDasboardText();
     }
 
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
-            if (g instanceof  Player) {
+            if (g instanceof Player) {
                 catched(this);
             }
         }

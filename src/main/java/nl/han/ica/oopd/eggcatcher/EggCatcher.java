@@ -1,7 +1,6 @@
 package nl.han.ica.oopd.eggcatcher;
 
 import nl.han.ica.oopd.eggcatcher.tiles.BoardsTile;
-import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.TileMap;
@@ -12,14 +11,12 @@ import processing.core.PApplet;
 import javax.swing.*;
 
 public class EggCatcher extends GameEngine {
-    private       TextObject dashboardText;
-    private       int        eggsCaught  = 0;
-    private final int        worldWidth  = 800;
-    private final int        worldHeight = 600;
-    private       Menu       menu;
-    private       Dashboard  menuDashboard;
-    private       Dashboard  gameDashboard;
-    private       EggSpawner eggSpawner;
+
+    private      int                 eggsCaught  = 0;
+    public final int                 worldWidth  = 800;
+    public final int                 worldHeight = 600;
+    private      EggSpawner          eggSpawner;
+    public       DashboardController dashboardController;
 
 
     public static void main(String[] args) {
@@ -35,8 +32,9 @@ public class EggCatcher extends GameEngine {
      */
     @Override
     public void setupGame() {
+        dashboardController = new DashboardController(this);
         setIcon();
-        createMenuDashboard();
+        dashboardController.createMenuDashboard();
         createViewWithoutViewport();
     }
 
@@ -45,40 +43,6 @@ public class EggCatcher extends GameEngine {
         frame.setIconImage(gameIcon.getImage());
     }
 
-    /**
-     * Tekent het game dashboard.
-     */
-    private void createGameDashboard() {
-        gameDashboard = new Dashboard(0, 0, worldWidth, worldHeight);
-        dashboardText = new TextObject("Aantal gevangen eieren: " + eggsCaught);
-        gameDashboard.addGameObject(dashboardText);
-        addDashboard(gameDashboard);
-    }
-
-    /**
-     * Verwijderd het game dashboard.
-     */
-    private void removeGameDashboard() {
-        deleteDashboard(gameDashboard);
-    }
-
-    /**
-     * Tekent het menu dashboard.
-     */
-    private void createMenuDashboard() {
-        menuDashboard = new Dashboard(0, 0, worldWidth, worldHeight);
-        menu = new Menu(this);
-        menuDashboard.addGameObject(menu);
-        addDashboard(menuDashboard);
-    }
-
-    /**
-     * Verwijderd het menu dashboard.
-     */
-    private void removeMenuDashboard() {
-        deleteDashboard(menuDashboard);
-        deleteGameObject(menu);
-    }
 
     /**
      * Maakt de spawner voor de eieren aan
@@ -109,6 +73,7 @@ public class EggCatcher extends GameEngine {
 
     /**
      * Berekening van het plaatsen van de kippen.
+     *
      * @return Een derde van de breedte van de world.
      */
     public float getThirdOfWorldSize() {
@@ -121,7 +86,7 @@ public class EggCatcher extends GameEngine {
     public void increaseEggsCaught() {
         eggsCaught++;
 
-        refreshDasboardText();
+        dashboardController.refreshDasboardText();
     }
 
     /**
@@ -165,22 +130,16 @@ public class EggCatcher extends GameEngine {
         super.keyPressed();
     }
 
-    /**
-     * Vernieuwt het dashboard
-     */
-    public void refreshDasboardText() {
-        dashboardText.setText("Aantal gevangen eieren: " + eggsCaught);
-    }
 
     /**
      * Reset de game nadat de speler af is.
      */
     public void reset() {
-        removeGameDashboard();
+        dashboardController.removeGameDashboard();
         SoundController.pause(SoundController.getBackgroundSound());
         eggSpawner.stopAlarm();
         resetEggsCounter();
-        createMenuDashboard();
+        dashboardController.createMenuDashboard();
     }
 
     /**
@@ -194,8 +153,8 @@ public class EggCatcher extends GameEngine {
      * Start de game op.
      */
     public void startGame() {
-        removeMenuDashboard();
-        createGameDashboard();
+        dashboardController.removeMenuDashboard();
+        dashboardController.createGameDashboard();
         initializeTileMap();
         SoundController.init(this);
         createObjects();
@@ -204,6 +163,7 @@ public class EggCatcher extends GameEngine {
 
     /**
      * Retourneerd het aantal gevangen eieren.
+     *
      * @return eggsCaught
      */
     public int getEggsCaught() {
