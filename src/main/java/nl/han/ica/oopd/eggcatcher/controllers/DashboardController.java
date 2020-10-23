@@ -54,7 +54,7 @@ public class DashboardController {
     /**
      * Vernieuwt het dashboard
      */
-    public void refreshDasboardText() {
+    public void refreshGameDashboardText() {
         dashboardText.setText("Aantal gevangen eieren: " + game.getEggsCaught());
     }
 }

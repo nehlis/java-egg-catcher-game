@@ -87,8 +87,7 @@ public class EggCatcher extends GameEngine {
      */
     public void increaseEggsCaught() {
         eggsCaught++;
-
-        dashboardController.refreshDasboardText();
+        dashboardController.refreshGameDashboardText();
     }
 
     /**

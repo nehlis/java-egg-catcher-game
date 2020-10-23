@@ -51,7 +51,6 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         Statistics.setLastScore(world.getEggsCaught());
 
         world.deleteGameObject(egg);
-        world.dashboardController.refreshDasboardText();
     }
 
     @Override
