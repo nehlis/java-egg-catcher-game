@@ -3,10 +3,6 @@ package nl.han.ica.oopd.eggcatcher;
 import nl.han.ica.oopg.objects.GameObject;
 import processing.core.PGraphics;
 
-/**
- * @author Ralph Niels
- * Wordt gebruikt om een tekst te kunnen afbeelden
- */
 public class TextObject extends GameObject {
 
     private String text;
@@ -20,9 +16,7 @@ public class TextObject extends GameObject {
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update() {}
 
     @Override
     public void draw(PGraphics g) {

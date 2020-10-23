@@ -4,7 +4,6 @@ import nl.han.ica.oopd.eggcatcher.tiles.BoardsTile;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.View;
@@ -24,10 +23,10 @@ public class EggCatcher extends GameEngine {
 
 
     public static void main(String[] args) {
-        String[]   processingArgs = {"EggCatcher The Game"};
-        EggCatcher mySketch       = new EggCatcher();
+        String[]   processingArgs = { "EggCatcher The Game" };
+        EggCatcher game           = new EggCatcher();
 
-        PApplet.runSketch(processingArgs, mySketch);
+        PApplet.runSketch(processingArgs, game);
     }
 
     /**
@@ -93,6 +92,7 @@ public class EggCatcher extends GameEngine {
     private void createViewWithoutViewport(int screenWidth, int screenHeight) {
         View view = new View(screenWidth, screenHeight);
         view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
+
 
         setView(view);
         size(screenWidth, screenHeight);
