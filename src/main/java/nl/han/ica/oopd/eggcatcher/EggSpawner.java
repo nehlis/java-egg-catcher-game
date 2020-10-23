@@ -14,7 +14,8 @@ public class EggSpawner implements IAlarmListener {
     private final Sound      fallSound;
     private final Sound      catchSound;
     private       Chicken[]  chickens;
-    private Alarm            alarm;
+    private       Alarm      alarm;
+
     /**
      * Constructor
      *
@@ -34,7 +35,7 @@ public class EggSpawner implements IAlarmListener {
     }
 
     private void generateChickens() {
-        chickens = new Chicken[] { new Chicken(), new Chicken(), new Chicken() };
+        chickens = new Chicken[]{new Chicken(), new Chicken(), new Chicken()};
 
         for (int i = 0; i < chickens.length; i++) {
             world.addGameObject(chickens[i], (world.getThirdOfWorldSize() * (i + 1)) - (world.getThirdOfWorldSize() / 2), 75);

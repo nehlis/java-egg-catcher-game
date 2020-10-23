@@ -17,8 +17,8 @@ public class EggCatcher extends GameEngine {
     private      int                 eggsCaught  = 0;
     public final int                 worldWidth  = 800;
     public final int                 worldHeight = 600;
-    private EggSpawner          eggSpawner;
-    public  DashboardController dashboardController;
+    private      EggSpawner          eggSpawner;
+    public       DashboardController dashboardController;
 
 
     public static void main(String[] args) {
@@ -173,5 +173,6 @@ public class EggCatcher extends GameEngine {
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
 }
