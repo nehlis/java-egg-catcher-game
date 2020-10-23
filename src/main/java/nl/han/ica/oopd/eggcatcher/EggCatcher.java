@@ -12,18 +12,18 @@ import processing.core.PApplet;
 import javax.swing.*;
 
 public class EggCatcher extends GameEngine {
-    private TextObject dashboardText;
-    private int        eggsCaught = 0;
-    private int        worldWidth;
-    private int        worldHeight;
-    private Menu       menu;
-    private Dashboard  menuDashboard;
-    private Dashboard  gameDashboard;
-    private EggSpawner eggSpawner;
+    private       TextObject dashboardText;
+    private       int        eggsCaught  = 0;
+    private final int        worldWidth  = 800;
+    private final int        worldHeight = 600;
+    private       Menu       menu;
+    private       Dashboard  menuDashboard;
+    private       Dashboard  gameDashboard;
+    private       EggSpawner eggSpawner;
 
 
     public static void main(String[] args) {
-        String[]   processingArgs = { "EggCatcher The Game" };
+        String[]   processingArgs = {"EggCatcher The Game"};
         EggCatcher game           = new EggCatcher();
 
         PApplet.runSketch(processingArgs, game);
@@ -35,16 +35,19 @@ public class EggCatcher extends GameEngine {
      */
     @Override
     public void setupGame() {
-        this.worldWidth = 800;
-        this.worldHeight = 600;
-
-        ImageIcon gameIcon = new ImageIcon(loadBytes("src/main/java/nl/han/ica/oopd/eggcatcher/media/egg.png"));
-        frame.setIconImage(gameIcon.getImage());
-
+        setIcon();
         createMenuDashboard();
-        createViewWithoutViewport(worldWidth, worldHeight);
+        createViewWithoutViewport();
     }
 
+    public void setIcon() {
+        ImageIcon gameIcon = new ImageIcon(loadBytes("src/main/java/nl/han/ica/oopd/eggcatcher/media/egg.png"));
+        frame.setIconImage(gameIcon.getImage());
+    }
+
+    /**
+     * Tekent het game dashboard.
+     */
     private void createGameDashboard() {
         gameDashboard = new Dashboard(0, 0, worldWidth, worldHeight);
         dashboardText = new TextObject("Aantal gevangen eieren: " + eggsCaught);
@@ -52,10 +55,16 @@ public class EggCatcher extends GameEngine {
         addDashboard(gameDashboard);
     }
 
+    /**
+     * Verwijderd het game dashboard.
+     */
     private void removeGameDashboard() {
         deleteDashboard(gameDashboard);
     }
 
+    /**
+     * Tekent het menu dashboard.
+     */
     private void createMenuDashboard() {
         menuDashboard = new Dashboard(0, 0, worldWidth, worldHeight);
         menu = new Menu(this);
@@ -63,6 +72,9 @@ public class EggCatcher extends GameEngine {
         addDashboard(menuDashboard);
     }
 
+    /**
+     * Verwijderd het menu dashboard.
+     */
     private void removeMenuDashboard() {
         deleteDashboard(menuDashboard);
         deleteGameObject(menu);
@@ -85,23 +97,20 @@ public class EggCatcher extends GameEngine {
 
     /**
      * Creeërt de view zonder viewport
-     *
-     * @param screenWidth  Breedte van het scherm
-     * @param screenHeight Hoogte van het scherm
      */
-    private void createViewWithoutViewport(int screenWidth, int screenHeight) {
-        View view = new View(screenWidth, screenHeight);
+    private void createViewWithoutViewport() {
+        View view = new View(worldWidth, worldHeight);
         view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
 
 
         setView(view);
-        size(screenWidth, screenHeight);
+        size(worldWidth, worldHeight);
     }
 
-    public int getEggsCaught() {
-        return eggsCaught;
-    }
-
+    /**
+     * Berekening van het plaatsen van de kippen.
+     * @return Een derde van de breedte van de world.
+     */
     public float getThirdOfWorldSize() {
         return (float) worldWidth / 3;
     }
@@ -149,7 +158,7 @@ public class EggCatcher extends GameEngine {
     public void keyPressed() {
         if (!GameState.isPlaying() && key == ' ') {
             GameState.plays();
-            start();
+            startGame();
             return;
         }
 
@@ -163,6 +172,9 @@ public class EggCatcher extends GameEngine {
         dashboardText.setText("Aantal gevangen eieren: " + eggsCaught);
     }
 
+    /**
+     * Reset de game nadat de speler af is.
+     */
     public void reset() {
         removeGameDashboard();
         SoundController.pause(SoundController.getBackgroundSound());
@@ -171,19 +183,31 @@ public class EggCatcher extends GameEngine {
         createMenuDashboard();
     }
 
+    /**
+     * Reset de gevangen eieren counter.
+     */
     public void resetEggsCounter() {
         eggsCaught = 0;
     }
 
-
-
-    public void start() {
+    /**
+     * Start de game op.
+     */
+    public void startGame() {
         removeMenuDashboard();
         createGameDashboard();
         initializeTileMap();
         SoundController.init(this);
         createObjects();
         createEggSpawner();
+    }
+
+    /**
+     * Retourneerd het aantal gevangen eieren.
+     * @return eggsCaught
+     */
+    public int getEggsCaught() {
+        return eggsCaught;
     }
 
     @Override
