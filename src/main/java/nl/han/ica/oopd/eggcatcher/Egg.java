@@ -43,7 +43,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         DrawObject.getEggShape(g, x, y);
     }
 
-    public void catched(Egg egg) {
+    public void caught(Egg egg) {
         SoundController.play(SoundController.getEggCatchSound());
         world.increaseEggsCaught();
 
@@ -58,7 +58,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
             if (g instanceof Player) {
-                catched(this);
+                caught(this);
             }
         }
     }
