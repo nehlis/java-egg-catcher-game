@@ -14,15 +14,12 @@ import javax.swing.*;
 
 public class EggCatcher extends GameEngine {
     private TextObject dashboardText;
-    private Sound      backgroundSound;
-    private Sound      eggFallSound;
-    private Sound      eggCatchSound;
     private int        eggsCaught = 0;
     private int        worldWidth;
     private int        worldHeight;
     private Menu       menu;
-    private Dashboard  dashboardMenu;
-    private Dashboard  dashboardGame;
+    private Dashboard  menuDashboard;
+    private Dashboard  gameDashboard;
     private EggSpawner eggSpawner;
 
 
@@ -33,18 +30,50 @@ public class EggCatcher extends GameEngine {
         PApplet.runSketch(processingArgs, mySketch);
     }
 
-    private void createDashboard(int dashboardWidth, int dashboardHeight) {
-        dashboardGame = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
+    /**
+     * In deze methode worden de voor het spel
+     * noodzakelijke zaken geïnitialiseerd
+     */
+    @Override
+    public void setupGame() {
+        this.worldWidth = 800;
+        this.worldHeight = 600;
+
+        ImageIcon gameIcon = new ImageIcon(loadBytes("src/main/java/nl/han/ica/oopd/eggcatcher/media/egg.png"));
+        frame.setIconImage(gameIcon.getImage());
+
+        createMenuDashboard();
+        createViewWithoutViewport(worldWidth, worldHeight);
+    }
+
+    private void createGameDashboard() {
+        gameDashboard = new Dashboard(0, 0, worldWidth, worldHeight);
         dashboardText = new TextObject("Aantal gevangen eieren: " + eggsCaught);
-        dashboardGame.addGameObject(dashboardText);
-        addDashboard(dashboardGame);
+        gameDashboard.addGameObject(dashboardText);
+        addDashboard(gameDashboard);
+    }
+
+    private void removeGameDashboard() {
+        deleteDashboard(gameDashboard);
+    }
+
+    private void createMenuDashboard() {
+        menuDashboard = new Dashboard(0, 0, worldWidth, worldHeight);
+        menu = new Menu(this);
+        menuDashboard.addGameObject(menu);
+        addDashboard(menuDashboard);
+    }
+
+    private void removeMenuDashboard() {
+        deleteDashboard(menuDashboard);
+        deleteGameObject(menu);
     }
 
     /**
      * Maakt de spawner voor de eieren aan
      */
     public void createEggSpawner() {
-        eggSpawner = new EggSpawner(this, eggFallSound, eggCatchSound, 1);
+        eggSpawner = new EggSpawner(this, SoundController.getEggFallSound(), SoundController.getEggCatchSound(), 1);
     }
 
     /**
@@ -69,6 +98,10 @@ public class EggCatcher extends GameEngine {
         size(screenWidth, screenHeight);
     }
 
+    public int getEggsCaught() {
+        return eggsCaught;
+    }
+
     public float getThirdOfWorldSize() {
         return (float) worldWidth / 3;
     }
@@ -79,21 +112,7 @@ public class EggCatcher extends GameEngine {
     public void increaseEggsCaught() {
         eggsCaught++;
 
-        Statistics.setHighscore(Math.max(Statistics.getHighscore(), eggsCaught));
-        Statistics.setLastScore(eggsCaught);
-
         refreshDasboardText();
-    }
-
-    /**
-     * Initialiseert geluid
-     */
-    private void initializeSound() {
-        backgroundSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/waterworld.mp3");
-        backgroundSound.loop(-1);
-
-        eggFallSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/game-over.mp3");
-        eggCatchSound = new Sound(this, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
     }
 
     /**
@@ -128,77 +147,45 @@ public class EggCatcher extends GameEngine {
 
     @Override
     public void keyPressed() {
-        if (key == ' ' && !GameState.isPlaying()) {
+        if (!GameState.isPlaying() && key == ' ') {
             GameState.plays();
-            deleteGameObject(menu);
-            deleteDashboard(dashboardMenu);
-            startGame();
-        } else {
-            super.keyPressed();
+            start();
+            return;
         }
-    }
 
-    /**
-     * Maakt het dashboard aan
-     *
-     * @param dashboardWidth  Gewenste breedte van dashboard
-     * @param dashboardHeight Gewenste hoogte van dashboard
-     */
-    private void menuDashboard(int dashboardWidth, int dashboardHeight) {
-        dashboardMenu = new Dashboard(0, 0, dashboardWidth, dashboardHeight);
-        menu = new Menu(this);
-        dashboardMenu.addGameObject(menu);
-        addDashboard(dashboardMenu);
-    }
-
-    private void pauseMusic() {
-        backgroundSound.pause();
+        super.keyPressed();
     }
 
     /**
      * Vernieuwt het dashboard
      */
-    private void refreshDasboardText() {
+    public void refreshDasboardText() {
         dashboardText.setText("Aantal gevangen eieren: " + eggsCaught);
     }
 
     public void reset() {
-        deleteDashboard(dashboardGame);
-        pauseMusic();
-        dashboardGame = null;
+        removeGameDashboard();
+        SoundController.pause(SoundController.getBackgroundSound());
         eggSpawner.stopAlarm();
         resetEggsCounter();
-        menuDashboard(worldWidth, worldHeight);
+        createMenuDashboard();
     }
 
     public void resetEggsCounter() {
         eggsCaught = 0;
     }
 
-    /**
-     * In deze methode worden de voor het spel
-     * noodzakelijke zaken geïnitialiseerd
-     */
-    @Override
-    public void setupGame() {
-        this.worldWidth = 800;
-        this.worldHeight = 600;
-        ImageIcon gameIcon = new ImageIcon(loadBytes("src/main/java/nl/han/ica/oopd/eggcatcher/media/egg.png"));
-        frame.setIconImage(gameIcon.getImage());
 
-        menuDashboard(worldWidth, worldHeight);
-        createViewWithoutViewport(worldWidth, worldHeight);
-    }
 
-    public void startGame() {
-        createDashboard(worldWidth, worldHeight);
+    public void start() {
+        removeMenuDashboard();
+        createGameDashboard();
         initializeTileMap();
-        initializeSound();
+        SoundController.init(this);
         createObjects();
         createEggSpawner();
     }
 
     @Override
-    public void update() {
-    }
+    public void update() {}
 }

@@ -8,11 +8,7 @@ import processing.core.PGraphics;
 import java.util.List;
 
 public class Egg extends GameObject implements ICollidableWithGameObjects {
-
-    private final Sound      fallSound;
-    private final Sound      catchSound;
     private final EggCatcher world;
-    private final int        size = 50;
 
     /**
      * Constructor
@@ -21,9 +17,8 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
      * @param fallSound Geluid dat moet klinken als het ei valt.
      */
     public Egg(EggCatcher world, Sound fallSound, Sound catchSound) {
-        this.fallSound = fallSound;
-        this.catchSound = catchSound;
         this.world = world;
+        int size = 50;
 
         setySpeed(size / 10f);
         setHeight(size);
@@ -34,8 +29,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public void update() {
         if (getY() < world.getHeight() || !GameState.isPlaying()) return;
 
-        fallSound.cue(0);
-        fallSound.play();
+        SoundController.play(SoundController.getEggFallSound());
         world.deleteAllGameOBjects();
         GameState.died();
         world.reset();
@@ -60,14 +54,22 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         g.popMatrix();
     }
 
+    public void catched(Egg egg) {
+        SoundController.play(SoundController.getEggCatchSound());
+        world.increaseEggsCaught();
+
+        Statistics.setHighscore(Math.max(Statistics.getHighscore(), world.getEggsCaught()));
+        Statistics.setLastScore(world.getEggsCaught());
+
+        world.deleteGameObject(egg);
+        world.refreshDasboardText();
+    }
+
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {
-            if (g instanceof Player) {
-                catchSound.cue(0);
-                catchSound.play();
-                world.increaseEggsCaught();
-                world.deleteGameObject(this);
+            if (g instanceof  Player) {
+                catched(this);
             }
         }
     }
