@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nl.han.ica.oopd</groupId>
-    <artifactId>waterworld</artifactId>
+    <artifactId>EggCatcher</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>waterworld</name>
-    <url>https://github.com/HANICA/waterworld</url>
+    <name>Egg Catcher</name>
+    <url>https://github.com/nehlis/java-egg-catcher-game</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,11 +23,4 @@
             <version>2.0.0</version>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>oopg-repo</id>
-            <url>https://raw.github.com/HANICA/oopg/gh-pages/</url>
-        </repository>
-    </repositories>
 </project>
