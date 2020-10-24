@@ -5,9 +5,9 @@ jdk:
 after_success:
   - mvn clean
   - mvn eclipse:eclipse
-  - zip -r waterworld .
+  - zip -r eggcatcher .
   - mkdir release
-  - mv waterworld.zip release/
+  - mv eggcatcher.zip release/
 
 deploy:
     provider: pages

@@ -42,14 +42,6 @@ public class SoundController {
         playable.play();
     }
 
-    public static Sound getEggCatchSound() {
-        return eggCatchSound;
-    }
-
-    public static Sound getEggFallSound() {
-        return eggFallSound;
-    }
-
     public static Sound getBackgroundSound() {
         return backgroundSound;
     }

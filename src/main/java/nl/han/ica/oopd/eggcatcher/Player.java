@@ -12,8 +12,7 @@ import processing.core.PVector;
 import java.util.List;
 
 public class Player extends AnimatedSpriteObject implements ICollidableWithTiles {
-
-    final         int        size = 25;
+    private final int        size = 25;
     private final EggCatcher world;
 
     /**

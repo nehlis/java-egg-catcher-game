@@ -5,18 +5,14 @@ import processing.core.PGraphics;
 
 
 public class Menu extends GameObject {
-
-    EggCatcher game;
+    private final EggCatcher game;
 
     public Menu(EggCatcher game) {
         this.game = game;
-
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update() {}
 
     @Override
     public void draw(PGraphics g) {

@@ -18,6 +18,6 @@ background.jpg      -> https://commons.wikimedia.org/wiki/File:Undervann0002.jpg
 boards-tile.jpg     -> http://opengameart.org/node/8137
 player.png          -> http://www.widgetworx.com/spritelib/
 pop.mp3             -> http://opengameart.org/content/bubbles-pop (geconverteerd naar mp3)
-Waterworld.mp3    	-> Zelfgemaakt
+eggcatcher.mp3    	-> Zelfgemaakt
 zwaardvis.png       -> http://opengameart.org/content/fish-pack
-seaweed-tile.png       -> seaweed-tile.png
+seaweed-tile.png    -> seaweed-tile.png

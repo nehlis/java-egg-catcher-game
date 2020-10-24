@@ -50,7 +50,7 @@ public class EggCatcher extends GameEngine {
      * Maakt de spawner voor de eieren aan
      */
     public void createEggSpawner() {
-        eggSpawner = new EggSpawner(this, SoundController.getEggFallSound(), SoundController.getEggCatchSound(), 1);
+        eggSpawner = new EggSpawner(this, 1);
     }
 
     /**

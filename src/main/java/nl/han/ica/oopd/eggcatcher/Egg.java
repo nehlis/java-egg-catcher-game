@@ -15,9 +15,8 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
      * Constructor
      *
      * @param world     Referentie naar de wereld
-     * @param fallSound Geluid dat moet klinken als het ei valt.
      */
-    public Egg(EggCatcher world, Sound fallSound, Sound catchSound) {
+    public Egg(EggCatcher world) {
         this.world = world;
         int size = 50;
 

@@ -11,8 +11,6 @@ public class EggSpawner implements IAlarmListener {
     private final float      eggsPerSecond;
     private final Random     random;
     private final EggCatcher world;
-    private final Sound      fallSound;
-    private final Sound      catchSound;
     private       Chicken[]  chickens;
     private       Alarm      alarm;
 
@@ -20,14 +18,11 @@ public class EggSpawner implements IAlarmListener {
      * Constructor
      *
      * @param world         Referentie naar de wereld
-     * @param fallSound     Geluid dat moet klinken als een ei valt.
      * @param eggsPerSecond Aantal eieren dat per seconden gemaakt moet worden.
      */
-    public EggSpawner(EggCatcher world, Sound fallSound, Sound catchSound, float eggsPerSecond) {
+    public EggSpawner(EggCatcher world, float eggsPerSecond) {
         this.eggsPerSecond = eggsPerSecond;
         this.world = world;
-        this.fallSound = fallSound;
-        this.catchSound = catchSound;
         random = new Random();
 
         generateChickens();
@@ -50,13 +45,12 @@ public class EggSpawner implements IAlarmListener {
 
     public void stopAlarm() {
         alarm.stop();
-
     }
 
 
     @Override
     public void triggerAlarm(String alarmName) {
-        Egg     b             = new Egg(world, fallSound, catchSound);
+        Egg     b             = new Egg(world);
         Chicken spawnLocation = getRandomChicken();
 
         world.addGameObject(b, spawnLocation.getX(), spawnLocation.getY());
