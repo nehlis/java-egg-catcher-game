@@ -158,7 +158,7 @@ public class EggCatcher extends GameEngine {
     }
 
     /**
-     * Retourneerd het aantal gevangen eieren.
+     * Retourneert het aantal gevangen eieren.
      *
      * @return eggsCaught
      */

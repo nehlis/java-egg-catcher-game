@@ -4,7 +4,7 @@ import processing.core.PGraphics;
 
 public class DrawObject {
     /**
-     * Retourneerd een ei vorm.
+     * Retourneert een ei vorm.
      *
      * @param g Graphics engine.
      * @param x x as.
