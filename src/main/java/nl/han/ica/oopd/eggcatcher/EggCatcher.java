@@ -20,12 +20,8 @@ public class EggCatcher extends GameEngine {
     private      EggSpawner          eggSpawner;
     public       DashboardController dashboardController;
 
-
     public static void main(String[] args) {
-        String[]   processingArgs = {"EggCatcher The Game"};
-        EggCatcher game           = new EggCatcher();
-
-        PApplet.runSketch(processingArgs, game);
+        PApplet.runSketch(new String[]{"EggCatcher The Game"}, new EggCatcher());
     }
 
     /**
@@ -44,7 +40,6 @@ public class EggCatcher extends GameEngine {
         ImageIcon gameIcon = new ImageIcon(loadBytes("src/main/java/nl/han/ica/oopd/eggcatcher/media/egg.png"));
         frame.setIconImage(gameIcon.getImage());
     }
-
 
     /**
      * Maakt de spawner voor de eieren aan

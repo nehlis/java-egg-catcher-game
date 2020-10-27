@@ -2,12 +2,10 @@ package nl.han.ica.oopd.eggcatcher;
 
 import nl.han.ica.oopg.alarm.Alarm;
 import nl.han.ica.oopg.alarm.IAlarmListener;
-import nl.han.ica.oopg.sound.Sound;
 
 import java.util.Random;
 
 public class EggSpawner implements IAlarmListener {
-
     private final float      eggsPerSecond;
     private final Random     random;
     private final EggCatcher world;
@@ -29,6 +27,9 @@ public class EggSpawner implements IAlarmListener {
         startAlarm();
     }
 
+    /**
+     * Genereerd de kippen die de eieren laten vallen.
+     */
     private void generateChickens() {
         chickens = new Chicken[]{new Chicken(world), new Chicken(world), new Chicken(world)};
 
@@ -37,17 +38,27 @@ public class EggSpawner implements IAlarmListener {
         }
     }
 
+    /**
+     * Begint het alarm.
+     */
     private void startAlarm() {
         alarm = new Alarm("New egg", 1 / eggsPerSecond);
         alarm.addTarget(this);
         alarm.start();
     }
 
+    /**
+     * Stopt het alarm.
+     */
     public void stopAlarm() {
         alarm.stop();
     }
 
-
+    /**
+     * Triggert het alarm.
+     *
+     * @param alarmName Naam van het alarm
+     */
     @Override
     public void triggerAlarm(String alarmName) {
         Egg     b             = new Egg(world);

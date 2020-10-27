@@ -14,7 +14,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     /**
      * Constructor
      *
-     * @param world     Referentie naar de wereld
+     * @param world Referentie naar de wereld
      */
     public Egg(EggCatcher world) {
         this.world = world;
@@ -25,6 +25,9 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         setWidth(size);
     }
 
+    /**
+     * Runt wanneer het ei object update.
+     */
     @Override
     public void update() {
         if (getY() < world.getHeight() || !GameState.isPlaying()) return;
@@ -35,6 +38,9 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         world.reset();
     }
 
+    /**
+     * Tekent het ei object.
+     */
     @Override
     public void draw(PGraphics g) {
         if (!GameState.isPlaying()) return;
@@ -42,6 +48,12 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         DrawObject.getEggShape(g, x, y);
     }
 
+
+    /**
+     * Vangt het ei.
+     *
+     * @param egg Het ei.
+     */
     public void caught(Egg egg) {
         SoundController.play("catch");
         world.increaseEggsCaught();
@@ -52,6 +64,11 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
         world.deleteGameObject(egg);
     }
 
+    /**
+     * Laat de items botsen.
+     *
+     * @param collidedGameObjects Gebotst item.
+     */
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g : collidedGameObjects) {

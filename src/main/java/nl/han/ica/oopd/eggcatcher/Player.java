@@ -1,21 +1,25 @@
 package nl.han.ica.oopd.eggcatcher;
 
-import nl.han.ica.oopd.eggcatcher.tiles.BoardsTile;
 import nl.han.ica.oopg.collision.CollidedTile;
-import nl.han.ica.oopg.collision.CollisionSide;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
-import nl.han.ica.oopg.exceptions.TileNotFoundException;
-import processing.core.PVector;
 
 import java.util.List;
 
 public class Player extends SpriteCharacter implements ICollidableWithTiles {
-    private final int        size = 25;
+    private final int size = 25;
 
+    /**
+     * Constructor
+     *
+     * @param world EggCatcher
+     */
     Player(EggCatcher world) {
         super(world, "src/main/java/nl/han/ica/oopd/eggcatcher/media/player.png");
     }
 
+    /**
+     * Runt wanneer de speler update.
+     */
     @Override
     public void update() {
         if (getX() <= 0) {
@@ -37,6 +41,12 @@ public class Player extends SpriteCharacter implements ICollidableWithTiles {
 
     }
 
+    /**
+     * Key press event.
+     *
+     * @param keyCode Key pressed code.
+     * @param key     Key pressed char.
+     */
     @Override
     public void keyPressed(int keyCode, char key) {
         final int speed = 10;
@@ -52,27 +62,5 @@ public class Player extends SpriteCharacter implements ICollidableWithTiles {
 
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
-        PVector vector;
-
-        for (CollidedTile ct : collidedTiles) {
-            if (ct.getTile() instanceof BoardsTile) {
-                if (CollisionSide.TOP.equals(ct.getCollisionSide())) {
-                    try {
-                        vector = getWorld().getTileMap().getTilePixelLocation(ct.getTile());
-                        setY(vector.y - getHeight());
-                    } catch (TileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (CollisionSide.RIGHT.equals(ct.getCollisionSide())) {
-                    try {
-                        vector = getWorld().getTileMap().getTilePixelLocation(ct.getTile());
-                        getWorld().getTileMap().setTile((int) vector.x / 50, (int) vector.y / 50, -1);
-                    } catch (TileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
     }
 }

@@ -3,6 +3,13 @@ package nl.han.ica.oopd.eggcatcher;
 import processing.core.PGraphics;
 
 public class DrawObject {
+    /**
+     * Retourneerd een ei vorm.
+     *
+     * @param g Graphics engine.
+     * @param x x as.
+     * @param y y as.
+     */
     public static void getEggShape(PGraphics g, float x, float y) {
         g.noStroke();
         g.fill(255);

@@ -6,6 +6,10 @@ import nl.han.ica.oopg.objects.Sprite;
 public class SpriteCharacter extends AnimatedSpriteObject {
     private final EggCatcher world;
 
+    /**
+     * @param world De game.
+     * @param image Afbeelding van de sprite character.
+     */
     SpriteCharacter(EggCatcher world, String image) {
         super(new Sprite(image), 1);
         this.world = world;
@@ -14,8 +18,12 @@ public class SpriteCharacter extends AnimatedSpriteObject {
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
 
+    /**
+     * @return De wereld.
+     */
     public EggCatcher getWorld() {
         return world;
     }

@@ -8,6 +8,12 @@ public class SoundController {
     public static Sound eggCatchSound;
     public static Sound backgroundSound;
 
+
+    /**
+     * Initialiseert alle geluiden en speelt het achtergrondsgeluid.
+     *
+     * @param engine De Game Engine.
+     */
     public static void init(GameEngine engine) {
         eggFallSound = new Sound(engine, "src/main/java/nl/han/ica/oopd/eggcatcher/media/game-over.mp3");
         eggCatchSound = new Sound(engine, "src/main/java/nl/han/ica/oopd/eggcatcher/media/pop.mp3");
@@ -17,10 +23,20 @@ public class SoundController {
         play("background");
     }
 
+    /**
+     * Pauzeert een bepaald geluid.
+     *
+     * @param sound Het desbetreffende geluid.
+     */
     public static void pause(Sound sound) {
         sound.pause();
     }
 
+    /**
+     * Speelt een bepaald geluid.
+     *
+     * @param sound Het desbetreffende geluid.
+     */
     public static void play(String sound) {
         Sound playable;
 
@@ -42,6 +58,9 @@ public class SoundController {
         playable.play();
     }
 
+    /**
+     * @return Retourneerd het achtergrondsgeluid.
+     */
     public static Sound getBackgroundSound() {
         return backgroundSound;
     }
