@@ -44,7 +44,7 @@ public class Egg extends GameObject implements ICollidableWithGameObjects {
     public void draw(PGraphics g) {
         if (!GameState.isPlaying()) return;
 
-        DrawObject.getEggShape(g, x, y);
+        DrawObject.getEggShape(g, x + (117/2), y);
     }
 
 
