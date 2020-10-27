@@ -5,26 +5,15 @@ import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.CollisionSide;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
 import nl.han.ica.oopg.exceptions.TileNotFoundException;
-import nl.han.ica.oopg.objects.AnimatedSpriteObject;
-import nl.han.ica.oopg.objects.Sprite;
 import processing.core.PVector;
 
 import java.util.List;
 
-public class Player extends AnimatedSpriteObject implements ICollidableWithTiles {
+public class Player extends SpriteCharacter implements ICollidableWithTiles {
     private final int        size = 25;
-    private final EggCatcher world;
 
-    /**
-     * Constructor
-     *
-     * @param world Referentie naar de wereld
-     */
-    public Player(EggCatcher world) {
-        super(new Sprite("src/main/java/nl/han/ica/oopd/eggcatcher/media/player.png"), 1);
-        this.world = world;
-        setCurrentFrameIndex(0);
-        setFriction(0.05f);
+    Player(EggCatcher world) {
+        super(world, "src/main/java/nl/han/ica/oopd/eggcatcher/media/player.png");
     }
 
     @Override
@@ -37,13 +26,13 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             setySpeed(0);
             setY(0);
         }
-        if (getX() >= world.width - size) {
+        if (getX() >= getWorld().width - size) {
             setxSpeed(0);
-            setX(world.width - size);
+            setX(getWorld().width - size);
         }
-        if (getY() >= world.height - size) {
+        if (getY() >= getWorld().height - size) {
             setySpeed(0);
-            setY(world.height - size);
+            setY(getWorld().height - size);
         }
 
     }
@@ -51,11 +40,11 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     @Override
     public void keyPressed(int keyCode, char key) {
         final int speed = 10;
-        if (keyCode == world.LEFT || key == 'a') {
+        if (keyCode == getWorld().LEFT || key == 'a') {
             setDirectionSpeed(270, speed);
             setCurrentFrameIndex(0);
         }
-        if (keyCode == world.RIGHT || key == 'd') {
+        if (keyCode == getWorld().RIGHT || key == 'd') {
             setDirectionSpeed(90, speed);
             setCurrentFrameIndex(0);
         }
@@ -69,7 +58,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             if (ct.getTile() instanceof BoardsTile) {
                 if (CollisionSide.TOP.equals(ct.getCollisionSide())) {
                     try {
-                        vector = world.getTileMap().getTilePixelLocation(ct.getTile());
+                        vector = getWorld().getTileMap().getTilePixelLocation(ct.getTile());
                         setY(vector.y - getHeight());
                     } catch (TileNotFoundException e) {
                         e.printStackTrace();
@@ -77,8 +66,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 }
                 if (CollisionSide.RIGHT.equals(ct.getCollisionSide())) {
                     try {
-                        vector = world.getTileMap().getTilePixelLocation(ct.getTile());
-                        world.getTileMap().setTile((int) vector.x / 50, (int) vector.y / 50, -1);
+                        vector = getWorld().getTileMap().getTilePixelLocation(ct.getTile());
+                        getWorld().getTileMap().setTile((int) vector.x / 50, (int) vector.y / 50, -1);
                     } catch (TileNotFoundException e) {
                         e.printStackTrace();
                     }

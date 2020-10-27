@@ -1,16 +1,11 @@
 package nl.han.ica.oopd.eggcatcher;
 
-import nl.han.ica.oopg.objects.AnimatedSpriteObject;
-import nl.han.ica.oopg.objects.Sprite;
-
-public class Chicken extends AnimatedSpriteObject {
+public class Chicken extends SpriteCharacter {
     /**
      * Constructor
      */
-    public Chicken() {
-        super(new Sprite("src/main/java/nl/han/ica/oopd/eggcatcher/media/player.png"), 1);
-        setCurrentFrameIndex(0);
-        setFriction(0.05f);
+    public Chicken(EggCatcher world) {
+        super(world, "src/main/java/nl/han/ica/oopd/eggcatcher/media/player.png");
     }
 
     @Override
