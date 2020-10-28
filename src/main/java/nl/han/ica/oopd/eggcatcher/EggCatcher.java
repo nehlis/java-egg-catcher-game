@@ -92,8 +92,7 @@ public class EggCatcher extends GameEngine {
      * Initialiseert de tilemap
      */
     private void initializeTileMap() {
-        Sprite               boardsSprite  = new Sprite("src/main/java/nl/han/ica/oopd/eggcatcher/media/boards-tile.jpg");
-        TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
+        TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, null);
 
         TileType[] tileTypes = {boardTileType};
         int        tileSize  = 50;

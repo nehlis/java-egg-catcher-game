@@ -123,3 +123,6 @@ local.properties
 .classpath
 
 # End of https://www.gitignore.io/api/eclipse
+
+src/main/java/nl/han/ica/oopd/eggcatcher/media/jouw-score.txt
+src/main/java/nl/han/ica/oopd/eggcatcher/media/highscore.txt
