@@ -1,7 +1,8 @@
 package nl.han.ica.oopd.eggcatcher;
 
-import nl.han.ica.oopd.eggcatcher.controllers.DashboardController;
 import nl.han.ica.oopd.eggcatcher.controllers.SoundController;
+import nl.han.ica.oopd.eggcatcher.dashboards.GameDashboard;
+import nl.han.ica.oopd.eggcatcher.dashboards.MenuDashboard;
 import nl.han.ica.oopd.eggcatcher.tiles.BoardsTile;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
@@ -13,12 +14,12 @@ import processing.core.PApplet;
 import javax.swing.*;
 
 public class EggCatcher extends GameEngine {
-
     private      int                 eggsCaught  = 0;
     public final int                 worldWidth  = 800;
     public final int                 worldHeight = 600;
     private      EggSpawner          eggSpawner;
-    public       DashboardController dashboardController;
+    public       MenuDashboard       menuD;
+    public       GameDashboard       gameD;
 
     public static void main(String[] args) {
         PApplet.runSketch(new String[]{"EggCatcher The Game"}, new EggCatcher());
@@ -30,9 +31,11 @@ public class EggCatcher extends GameEngine {
      */
     @Override
     public void setupGame() {
-        dashboardController = new DashboardController(this);
+        menuD = new MenuDashboard(this);
+        gameD = new GameDashboard(this);
+
         setIcon();
-        dashboardController.createMenuDashboard();
+        menuD.create();
         createViewWithoutViewport();
     }
 
@@ -82,7 +85,7 @@ public class EggCatcher extends GameEngine {
      */
     public void increaseEggsCaught() {
         eggsCaught++;
-        dashboardController.refreshGameDashboardText();
+        gameD.refresh();
     }
 
     /**
@@ -131,11 +134,11 @@ public class EggCatcher extends GameEngine {
      * Reset de game nadat de speler af is.
      */
     public void reset() {
-        dashboardController.removeGameDashboard();
+        gameD.destroy();
         SoundController.pause(SoundController.getBackgroundSound());
         eggSpawner.stopAlarm();
         resetEggsCounter();
-        dashboardController.createMenuDashboard();
+        menuD.create();
     }
 
     /**
@@ -149,8 +152,8 @@ public class EggCatcher extends GameEngine {
      * Start de game op.
      */
     public void startGame() {
-        dashboardController.removeMenuDashboard();
-        dashboardController.createGameDashboard();
+        menuD.destroy();
+        gameD.create();
         initializeTileMap();
         SoundController.init(this);
         createObjects();
