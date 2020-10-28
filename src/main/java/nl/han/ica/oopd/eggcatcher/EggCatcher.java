@@ -66,7 +66,6 @@ public class EggCatcher extends GameEngine {
         View view = new View(worldWidth, worldHeight);
         view.setBackground(loadImage("src/main/java/nl/han/ica/oopd/eggcatcher/media/background.jpg"));
 
-
         setView(view);
         size(worldWidth, worldHeight);
     }
