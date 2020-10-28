@@ -20,8 +20,7 @@ public class Menu extends GameObject {
      * Update het menu object.
      */
     @Override
-    public void update() {
-    }
+    public void update() {}
 
     /**
      * Tekent het menu.

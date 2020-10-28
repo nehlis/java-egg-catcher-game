@@ -7,6 +7,8 @@ public class SpriteCharacter extends AnimatedSpriteObject {
     private final EggCatcher world;
 
     /**
+     * Constructor
+     *
      * @param world De game.
      * @param image Afbeelding van de sprite character.
      */
@@ -18,8 +20,7 @@ public class SpriteCharacter extends AnimatedSpriteObject {
     }
 
     @Override
-    public void update() {
-    }
+    public void update() {}
 
     /**
      * @return De wereld.

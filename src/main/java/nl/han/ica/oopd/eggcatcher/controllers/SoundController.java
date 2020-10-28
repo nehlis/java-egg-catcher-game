@@ -1,5 +1,6 @@
 package nl.han.ica.oopd.eggcatcher.controllers;
 
+import nl.han.ica.oopd.eggcatcher.EggCatcher;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.sound.Sound;
 

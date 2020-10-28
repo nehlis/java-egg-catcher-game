@@ -9,6 +9,5 @@ public class Chicken extends SpriteCharacter {
     }
 
     @Override
-    public void update() {
-    }
+    public void update() {}
 }
